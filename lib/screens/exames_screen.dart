@@ -49,6 +49,30 @@ class ExamesWidget extends StatelessWidget {
     required this.exame,
   }) : super(key: key);
 
+  void showStatus(BuildContext context) {
+    Map<String, dynamic> EstadoColor = {
+      "Finalizado": Colors.green,
+      "Processando": Colors.blue,
+    };
+
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        String status = exame['status'];
+
+        return AlertDialog(
+          title: const Text(
+            'Status',
+          ),
+          content: Text(
+            exame['status'],
+            style: TextStyle(color: EstadoColor[status]),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final dimensionsDevice = MediaQuery.of(context).size;
@@ -59,36 +83,39 @@ class ExamesWidget extends StatelessWidget {
       ),
       child: Card(
         elevation: 5,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: dimensionsDevice.width * 0.02,
-            vertical: dimensionsDevice.height * 0.01,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  const Text(
-                    "Nome: ",
-                  ),
-                  Text(
-                    exame['paciente'],
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Text(
-                    "Data: ",
-                  ),
-                  Text(
-                    exame['data'],
-                  ),
-                ],
-              ),
-            ],
+        child: InkWell(
+          onTap: () => showStatus(context),
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: dimensionsDevice.width * 0.02,
+              vertical: dimensionsDevice.height * 0.01,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const Text(
+                      "Nome: ",
+                    ),
+                    Text(
+                      exame['paciente'],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      "Data: ",
+                    ),
+                    Text(
+                      exame['data'],
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
