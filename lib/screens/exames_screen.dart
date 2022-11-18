@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ExamesScreen extends StatelessWidget {
   ExamesScreen({Key? key}) : super(key: key);
@@ -37,6 +38,23 @@ class ExamesScreen extends StatelessWidget {
         ),
         itemCount: exames.length,
         itemBuilder: (ctx, i) => ExamesWidget(exame: exames[i]),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(
+          Icons.camera,
+          color: Colors.white,
+        ),
+        label: const Text(
+          'Camera',
+        ),
+        onPressed: () async {
+          ImagePicker _picker = ImagePicker();
+
+          PickedFile? imageFile = await _picker.getImage(
+            source: ImageSource.camera,
+            maxWidth: 500,
+          );
+        },
       ),
     );
   }
