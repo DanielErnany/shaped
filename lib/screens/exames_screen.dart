@@ -48,9 +48,9 @@ class ExamesScreen extends StatelessWidget {
           'Camera',
         ),
         onPressed: () async {
-          ImagePicker _picker = ImagePicker();
+          ImagePicker picker = ImagePicker();
 
-          PickedFile? imageFile = await _picker.getImage(
+          await picker.pickImage(
             source: ImageSource.camera,
             maxWidth: 500,
           );
