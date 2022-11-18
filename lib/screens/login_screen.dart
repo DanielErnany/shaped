@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shaped/utils/routes.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -43,8 +44,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     String senha = _formData['senha']!;
 
-    if (email == 'shaped3D@shaped.com' || senha == 'shaped123') {
-// TODO EFETUAR LOGIN
+    if (email == 'shaped@shaped.com' || senha == 'shaped') {
+      Navigator.of(context).popAndPushNamed(Routes.EXAMES_SCREEN);
     } else {
       setState(() {
         _isIncorretoEmailSenha = true;
